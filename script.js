@@ -4,23 +4,24 @@ var Highcharts = require('highcharts')
 
 var chart, data, series
 
-$(function () {
+$(() => {
   data = new Array(500)
-  for (var i = 0; i < 500; ++i) {
-    data[i] = 0
-  }
+  data.fill(0)
 
   var fetchJSON = function (url) {
     return new Promise((resolve, reject) => {
       $.getJSON(url)
         .done((json) => resolve(json))
-        .fail((xhr, status, err) => reject(status + err.message));
+        .fail((xhr, status, err) => reject(status + err.message))
     })
   }
 
-  chart = new Highcharts.Chart(fetchJSON('/highchart-config.json'))
-  series = chart.series[0]
-  series.setData(data, true)
+  fetchJSON('/highchart-config.json').then((options) => {
+    chart = new Highcharts.Chart(options)
+    series = chart.series[0]
+    series.setData(data, true)
+  })
+
   var am = new AudioManager({
     useMicrophone: true,
     onEnterFrame: function () {
