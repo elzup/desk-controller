@@ -1,0 +1,64 @@
+{
+  "chart": {
+    "zoomType": "x",
+    "renderTo": "container"
+  },
+  "title": {
+    "text": "Concrete Traffic"
+  },
+  "xAxis": {
+    "type": "datetime",
+    "labels": {
+      "enabled": false
+    }
+  },
+  "yAxis": {
+    "title": {
+      "text": "Exchange rate"
+    },
+    "max": 150,
+    "min": 0
+  },
+  "legend": {
+    "enabled": false
+  },
+  "plotOptions": {
+    "area": {
+      "fillColor": {
+        "linearGradient": {
+          "x1": 0,
+          "y1": 0,
+          "x2": 0,
+          "y2": 1
+        },
+        "stops": [
+          [
+            0,
+            "#007ab5"
+          ],
+          [
+            1,
+            "#d8e6ec"
+          ]
+        ]
+      },
+      "marker": {
+        "radius": 2
+      },
+      "lineWidth": 1,
+      "states": {
+        "hover": {
+          "lineWidth": 1
+        }
+      },
+      "threshold": null
+    }
+  },
+  "series": [
+    {
+      "type": "area",
+      "name": "USD to EUR",
+      "data": []
+    }
+  ]
+}

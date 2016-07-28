@@ -1,0 +1,24 @@
+{
+  "name": "desk-controller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/elzup/desk-controller.git"
+  },
+  "keywords": [
+    "web",
+    "webapp",
+    "ubiquitous"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elzup/desk-controller/issues"
+  },
+  "homepage": "https://github.com/elzup/desk-controller#readme"
+}
