@@ -1,0 +1,3 @@
+[submodule "libs/AudioManager.js.git"]
+	path = libs/AudioManager.js.git
+	url = git@github.com:tnker/AudioManager.js.git
