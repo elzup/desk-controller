@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/elzup/desk-controller/issues"
   },
-  "homepage": "https://github.com/elzup/desk-controller#readme"
+  "homepage": "https://github.com/elzup/desk-controller#readme",
+  "devDependencies": {
+    "babelify": "^7.3.0"
+  }
 }

@@ -1,3 +1,5 @@
+var $ = require('jquery');
+var Highcharts = require('highcharts');
 var manager, chart, data, series;
 
 $(function () {
