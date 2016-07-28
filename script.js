@@ -1,66 +1,14 @@
-var manager, chart, data;
+var manager, chart, data, series;
 
 $(function () {
     data = new Array(500);
     for (var i=0; i < 500; ++i) {
         data[i] = 0;
     }
-    chart = new Highcharts.Chart({
-        chart: {
-            renderTo: 'container',
-            zoomType: 'x'
-        },
-        title: {
-            text: 'Concrete Traffic'
-        },
-        xAxis: {
-            type: 'datetime',
-            labels: {
-                enabled: false
-            }
-        },
-        yAxis: {
-            title: {
-                text: 'Exchange rate(dB)'
-            },
-            max: 150,
-            min: 0
-        },
-        legend: {
-            enabled: false
-        },
-        plotOptions: {
-            area: {
-                fillColor: {
-                    linearGradient: {
-                        x1: 0,
-                        y1: 0,
-                        x2: 0,
-                        y2: 1
-                    },
-                    stops: [
-                        [0, Highcharts.getOptions().colors[0]],
-                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                    ]
-                },
-                marker: {
-                    radius: 2
-                },
-                lineWidth: 1,
-                states: {
-                    hover: {
-                        lineWidth: 1
-                    }
-                },
-                threshold: null
-            }
-        },
-
-        series: [{
-            type: 'area',
-            name: 'USD to EUR',
-            data: data
-        }]
+    $.getJSON('/highchart-config.json', [], function(options) {
+      chart = new Highcharts.Chart(options);
+      series = chart.series[0];
+      series.setData(data, true);
     });
 
     manager = (new AudioManager({
@@ -77,7 +25,7 @@ $(function () {
                 data.shift();
                 data.shift();
             }
-            chart.series[0].setData(data, true);
+            series.setData(data, true);
         }
     })).init();
 });
