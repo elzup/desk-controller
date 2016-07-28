@@ -32,8 +32,14 @@
           "y2": 1
         },
         "stops": [
-          [0, "#007ab5"],
-          [1, "#d8e6ec"]
+          [
+            0,
+            "#007ab5"
+          ],
+          [
+            1,
+            "#d8e6ec"
+          ]
         ]
       },
       "marker": {
@@ -48,10 +54,11 @@
       "threshold": null
     }
   },
-
-  "series": [{
-    "type": "area",
-    "name": "USD to EUR",
-    "data": []
-  }]
+  "series": [
+    {
+      "type": "area",
+      "name": "USD to EUR",
+      "data": []
+    }
+  ]
 }
