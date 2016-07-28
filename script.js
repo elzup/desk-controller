@@ -23,7 +23,7 @@ $(function () {
             title: {
                 text: 'Exchange rate(dB)'
             },
-            max: 140000,
+            max: 150,
             min: 0
         },
         legend: {
@@ -66,10 +66,13 @@ $(function () {
     manager = (new AudioManager({
         useMicrophone   : true,
         onEnterFrame    : function() {
-            data.push(Utils.sum(this.analysers.mic.getByteFrequencyData()))
+            // avg of 1024 data
+            data.push(Utils.sum(this.analysers.mic.getByteFrequencyData()) / 1024);
             if (chart == null) {
                 return;
             }
+            // NOTE: length が変わらないと redraw が効かないので 2つずつ 変動させている
+            // 500 data Queue
             if (data.length > 500) {
                 data.shift();
                 data.shift();
