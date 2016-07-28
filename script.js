@@ -1,65 +1,66 @@
 var manager, chart, data;
 
 $(function () {
-    data = [];
-    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
-
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                zoomType: 'x'
-            },
-            title: {
-                text: 'USD to EUR exchange rate over time'
-            },
-            subtitle: {
-                text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-            },
-            xAxis: {
-                type: 'datetime'
-            },
-            yAxis: {
-                title: {
-                    text: 'Exchange rate'
-                }
-            },
-            legend: {
+    data = new Array(500);
+    for (var i=0; i < 500; ++i) {
+        data[i] = 0;
+    }
+    chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'container',
+            zoomType: 'x'
+        },
+        title: {
+            text: 'Concrete Traffic'
+        },
+        xAxis: {
+            type: 'datetime',
+            labels: {
                 enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Exchange rate(dB)'
             },
-            plotOptions: {
-                area: {
-                    fillColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        ]
+            max: 140000,
+            min: 0
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
                     },
-                    marker: {
-                        radius: 2
-                    },
-                    lineWidth: 1,
-                    states: {
-                        hover: {
-                            lineWidth: 1
-                        }
-                    },
-                    threshold: null
-                }
-            },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
 
-            series: [{
-                type: 'area',
-                name: 'USD to EUR',
-                data: []
-            }]
-        });
+        series: [{
+            type: 'area',
+            name: 'USD to EUR',
+            data: data
+        }]
     });
 
     manager = (new AudioManager({
@@ -69,12 +70,11 @@ $(function () {
             if (chart == null) {
                 return;
             }
-            if (data.length > 12) {
+            if (data.length > 500) {
                 data.shift();
                 data.shift();
             }
-            chart.series[0].setData(data);
-            chart.redraw()
+            chart.series[0].setData(data, true);
         }
     })).init();
 });
