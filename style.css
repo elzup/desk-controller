@@ -1,0 +1,41 @@
+#container {
+    height: 200px;
+}
+
+#game {
+    margin: 10px;
+    height: 500px;
+    background: #1bbb6a;
+    position: relative;
+}
+
+#player {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background-size: contain;
+    background-image: url("/img/kodack-ok.png");
+    left: 10%;
+}
+
+#player.ng {
+    background-image: url("/img/kodack-ng.png");
+}
+
+
+.point {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background-image: url("/img/berry.png");
+    background-size: contain;
+}
+
+.bad {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background-image: url("/img/ball.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
