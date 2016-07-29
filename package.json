@@ -29,5 +29,8 @@
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-standard": "^2.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.13.1"
   }
 }

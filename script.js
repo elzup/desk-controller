@@ -1,26 +1,18 @@
 'use strict'
-const $ = require('jquery')
+const axios = require('axios')
 const Highcharts = require('highcharts')
 
-let chart, data, series
+let chart, series
 
-data = Array.form(Array(500), x => 0)
+let data = Array.from(Array(500), x => 0)
 
-var fetchJSON = function (url) {
-  return new Promise((resolve, reject) => {
-    $.getJSON(url)
-      .done((json) => resolve(json))
-      .fail((xhr, status, err) => reject(status + err.message))
-  })
-}
-
-fetchJSON('/highchart-config.json').then((options) => {
-  chart = new Highcharts.Chart(options)
+axios.get('/highchart-config.json').then(response => {
+  chart = new Highcharts.Chart(response.data)
   series = chart.series[0]
   series.setData(data, true)
 })
 
-var am = new AudioManager({
+let am = new AudioManager({
   useMicrophone: true,
   onEnterFrame: function () {
     // avg of 1024 data
