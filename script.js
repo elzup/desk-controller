@@ -3,7 +3,6 @@ const axios = require('axios')
 const Highcharts = require('highcharts')
 
 let chart, series
-
 let data = Array.from(Array(500), x => 0)
 
 axios.get('/highchart-config.json').then(response => {
@@ -12,21 +11,23 @@ axios.get('/highchart-config.json').then(response => {
   series.setData(data, true)
 })
 
-let am = new AudioManager({
-  useMicrophone: true,
-  onEnterFrame: function () {
-    // avg of 1024 data
-    data.push(Utils.sum(this.analysers.mic.getByteFrequencyData()) / 1024)
-    if (!chart) {
-      return
-    }
-    // NOTE: length が変わらないと redraw が効かないので 2つずつ 変動させている
-    // 500 data Queue
-    if (data.length > 500) {
-      data.shift()
-      data.shift()
-    }
-    series.setData(data, true)
-  }
-})
-am.init()
+navigator.getUserMedia({audio : true}, stream => {
+  const audioContext = new AudioContext()
+  let source = audioContext.createMediaStreamSource(stream)
+  let analyser = audioContext.createAnalyser()
+  let frequencyData = new Uint8Array(analyser.frequencyBinCount)
+  let timeDomainData = new Uint8Array(analyser.frequencyBinCount)
+  source.connect(analyser)
+  setInterval(
+    () => {
+      analyser.getByteFrequencyData(frequencyData);
+      analyser.getByteTimeDomainData(timeDomainData);
+      data.push(Utils.sum(frequencyData) / 1024)
+      if (data.length > 500) {
+        data.shift()
+        data.shift()
+      }
+      series.setData(data, true)
+    }, 10
+  )
+}, () => {})
