@@ -16,7 +16,7 @@
     "title": {
       "text": "Exchange rate"
     },
-    "max": 150,
+    "max": 120,
     "min": 0
   },
   "legend": {

@@ -25,11 +25,13 @@ navigator.getUserMedia({audio: true}, stream => {
       analyser.getByteFrequencyData(frequencyData)
       analyser.getByteTimeDomainData(timeDomainData)
       const sum = frequencyData.reduce((sum, v) => sum + v, 0)
-      data.push(sum / 1024)
+      const pt = sum / analyser.frequencyBinCount
+      data.push(pt)
       if (data.length > 500) {
         data.shift()
         data.shift()
       }
+      document.getElementById('player').style.bottom = (pt * 100 / 150) + '%'
       series.setData(data, true)
     }, 10
   )
