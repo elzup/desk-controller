@@ -47,12 +47,12 @@ let game = pt => {
   $player.style.bottom = (pt * 3.4) + 'px'
   const playerBounds = $player.getBoundingClientRect()
   generation += 1
-  if (generation === 300) {
+  if (generation === 60) {
     // ボーナスアイテム生成
     generation = 0
     const $div = document.createElement('div')
     $div.setAttribute('class', 'point')
-    $div.style.top = '10%'
+    $div.style.top = ['10%', '40%', '75%'][Math.floor(Math.random() * 3)]
     $div.setAttribute('x', 0)
     $div.style.right = $div.getAttribute('x')
     $game.appendChild($div)
