@@ -4,7 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify -t babelify ./script.js -o ./bundle/script.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,17 @@
   "bugs": {
     "url": "https://github.com/elzup/desk-controller/issues"
   },
-  "homepage": "https://github.com/elzup/desk-controller#readme"
+  "homepage": "https://github.com/elzup/desk-controller#readme",
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "babelify": "^7.3.0",
+    "eslint": "^3.1.1",
+    "eslint-config-google": "^0.6.0",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-promise": "^2.0.0",
+    "eslint-plugin-standard": "^2.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.13.1"
+  }
 }
