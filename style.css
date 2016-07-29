@@ -13,13 +13,20 @@
     position: absolute;
     height: 50px;
     width: 50px;
-    background: #0b97c4;
+    background-size: contain;
+    background-image: url("/img/kodack-ng.png");
     left: 10%;
 }
+
+#player.ng {
+    background-image: url("/img/kodack-ng.png");
+}
+
 
 .point {
     position: absolute;
     height: 50px;
     width: 50px;
-    background: red;
+    background-image: url("/img/berry.png");
+    background-size: contain;
 }
