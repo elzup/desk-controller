@@ -16,3 +16,10 @@
     background: #0b97c4;
     left: 10%;
 }
+
+.point {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background: red;
+}
