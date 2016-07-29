@@ -47,11 +47,11 @@ let game = pt => {
   $player.style.bottom = (pt * 3.4) + 'px'
   const playerBounds = $player.getBoundingClientRect()
   generation += 1
-  if (generation === 60) {
-    // ボーナスアイテム生成
+  if (generation === 80) {
     generation = 0
     const $div = document.createElement('div')
-    $div.setAttribute('class', 'point')
+    // ボーナス or NG アイテム生成
+    $div.setAttribute('class', Math.random() < 0.5 ? 'point' : 'bad')
     $div.style.top = ['10%', '40%', '75%'][Math.floor(Math.random() * 3)]
     $div.setAttribute('x', 0)
     $div.style.right = $div.getAttribute('x')
@@ -63,6 +63,11 @@ let game = pt => {
     let newX = parseInt(item.getAttribute('x')) + 2
     let bounds = item.getBoundingClientRect()
     if (boundingCollision(playerBounds, bounds) || bounds.left + window.pageXOffset < 0) {
+      if (item.className === 'bad') {
+        $player.className = 'ng'
+      } else {
+        $player.className = ''
+      }
       $game.removeChild(item)
       pointItems.splice(i, 1)
       continue
