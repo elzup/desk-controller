@@ -11,7 +11,9 @@ axios.get('/highchart-config.json').then(response => {
   series.setData(data, true)
 })
 
-navigator.getUserMedia({audio : true}, stream => {
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia
+
+navigator.getUserMedia({audio: true}, stream => {
   const audioContext = new AudioContext()
   let source = audioContext.createMediaStreamSource(stream)
   let analyser = audioContext.createAnalyser()
@@ -20,9 +22,10 @@ navigator.getUserMedia({audio : true}, stream => {
   source.connect(analyser)
   setInterval(
     () => {
-      analyser.getByteFrequencyData(frequencyData);
-      analyser.getByteTimeDomainData(timeDomainData);
-      data.push(Utils.sum(frequencyData) / 1024)
+      analyser.getByteFrequencyData(frequencyData)
+      analyser.getByteTimeDomainData(timeDomainData)
+      const sum = frequencyData.reduce((sum, v) => sum + v, 0)
+      data.push(sum / 1024)
       if (data.length > 500) {
         data.shift()
         data.shift()
@@ -30,4 +33,5 @@ navigator.getUserMedia({audio : true}, stream => {
       series.setData(data, true)
     }, 10
   )
-}, () => {})
+}, () => {
+})
