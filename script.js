@@ -27,10 +27,10 @@ navigator.getUserMedia({audio: true}, stream => {
       analyser.getByteTimeDomainData(timeDomainData)
       const sum = frequencyData.reduce((sum, v) => sum + v, 0)
       const pt = sum / analyser.frequencyBinCount
-      data.push(pt)
+      data.unshift(pt)
       if (data.length > 500) {
-        data.shift()
-        data.shift()
+        data.pop()
+        data.pop()
       }
       game(pt)
       series.setData(data, true)
@@ -63,10 +63,12 @@ let game = pt => {
     let newX = parseInt(item.getAttribute('x')) + 2
     let bounds = item.getBoundingClientRect()
     if (boundingCollision(playerBounds, bounds) || bounds.left + window.pageXOffset < 0) {
-      if (item.className === 'bad') {
-        $player.className = 'ng'
-      } else {
-        $player.className = ''
+      if (boundingCollision(playerBounds, bounds)) {
+        if (item.className === 'bad') {
+          $player.className = 'ng'
+        } else {
+          $player.className = 'ok'
+        }
       }
       $game.removeChild(item)
       pointItems.splice(i, 1)
@@ -84,5 +86,5 @@ const boundingCollision = (bound1, bound2) => {
   let cy2 = (bound2.top + bound2.bottom) / 2
   let dx = cx1 - cx2
   let dy = cy1 - cy2
-  return 50 * 50 > dx * dx + dy * dy
+  return 70 * 70 > dx * dx + dy * dy
 }
